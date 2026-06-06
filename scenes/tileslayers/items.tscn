@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://btpk7ii1hk74h"]
+
+[ext_resource type="PackedScene" uid="uid://bvlsdh4esci57" path="res://scenes/items/item_health.tscn" id="1_pop5a"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_161vw"]
+resource_name = "Meat"
+scenes/1/scene = ExtResource("1_pop5a")
+scenes/1/display_placeholder = true
+
+[sub_resource type="TileSet" id="TileSet_1eb5w"]
+tile_size = Vector2i(32, 32)
+sources/1 = SubResource("TileSetScenesCollectionSource_161vw")
+
+[node name="Items" type="TileMapLayer" unique_id=1638611915]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_1eb5w")

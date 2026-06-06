@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://dn5b2jf2ix3bs"]
+
+[ext_resource type="PackedScene" uid="uid://d1luuhxpkvhgn" path="res://scenes/actors/spikes.tscn" id="1_3deee"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_u06sj"]
+resource_name = "Spikes"
+scenes/1/scene = ExtResource("1_3deee")
+
+[sub_resource type="TileSet" id="TileSet_hso4u"]
+sources/0 = SubResource("TileSetScenesCollectionSource_u06sj")
+
+[node name="Spikes" type="TileMapLayer" unique_id=1600164807]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_hso4u")

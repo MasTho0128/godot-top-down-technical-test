@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://cmfcbi6askg02"]
+
+[ext_resource type="Script" uid="uid://b5evaw573yksy" path="res://scripts/FMS/control_estados.gd" id="1_s8aar"]
+[ext_resource type="Script" uid="uid://xsqu7wov3gf8" path="res://scripts/actors/player/fms/idle.gd" id="2_ctgbu"]
+[ext_resource type="Script" uid="uid://mm8y0khbm22y" path="res://scripts/actors/player/fms/walk.gd" id="3_ky4c4"]
+[ext_resource type="Script" uid="uid://byg8vruo783fg" path="res://scripts/actors/player/fms/attack.gd" id="4_ilu10"]
+[ext_resource type="Script" uid="uid://bxcpk4hm556h6" path="res://scripts/actors/player/fms/hurt.gd" id="5_u87aw"]
+[ext_resource type="Script" uid="uid://cpf7t3sir5jtj" path="res://scripts/actors/player/fms/dead.gd" id="6_36oyy"]
+
+[node name="Node" type="Node" unique_id=413232679]
+
+[node name="FMS" type="Node" parent="." unique_id=1302796498]
+script = ExtResource("1_s8aar")
+estado_inicial = NodePath("")
+
+[node name="Idle" type="Node" parent="FMS" unique_id=373044676]
+script = ExtResource("2_ctgbu")
+
+[node name="Walk" type="Node" parent="FMS" unique_id=659739640]
+script = ExtResource("3_ky4c4")
+
+[node name="Attack" type="Node" parent="FMS" unique_id=1670320043]
+script = ExtResource("4_ilu10")
+
+[node name="Hurt" type="Node" parent="FMS" unique_id=682342252]
+script = ExtResource("5_u87aw")
+
+[node name="Dead" type="Node" parent="FMS" unique_id=399311710]
+script = ExtResource("6_36oyy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=132572410]

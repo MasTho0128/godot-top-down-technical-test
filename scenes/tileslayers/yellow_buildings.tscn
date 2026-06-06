@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://djqvt6f0qfdvb"]
+
+[ext_resource type="Texture2D" uid="uid://buudbc4lulc5w" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Barracks.png" id="1_xhapx"]
+[ext_resource type="Texture2D" uid="uid://ct2aengkgqod2" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Tower.png" id="2_uy4de"]
+[ext_resource type="Texture2D" uid="uid://dkhmxkpm4siq7" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/Monastery.png" id="3_7hi4w"]
+[ext_resource type="Texture2D" uid="uid://ddkrtdotxish3" path="res://assets/Tiny Swords (Free Pack)/Buildings/Yellow Buildings/House2.png" id="4_2wkx2"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fd4n5"]
+texture = ExtResource("1_xhapx")
+texture_region_size = Vector2i(192, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-80, 32, 80, 32, 80, 96, -80, 96)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ju3as"]
+texture = ExtResource("2_uy4de")
+texture_region_size = Vector2i(128, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 32, 32, 32, 32, 80, -32, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ei0jq"]
+texture = ExtResource("3_7hi4w")
+texture_region_size = Vector2i(192, 320)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, 16, 48, 16, 48, 128, -48, 128)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qc6wb"]
+texture = ExtResource("4_2wkx2")
+texture_region_size = Vector2i(128, 192)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-48, 16, 48, 16, 48, 128, -48, 128)
+
+[sub_resource type="TileSet" id="TileSet_veaqi"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/1 = SubResource("TileSetAtlasSource_fd4n5")
+sources/2 = SubResource("TileSetAtlasSource_ju3as")
+sources/3 = SubResource("TileSetAtlasSource_ei0jq")
+sources/4 = SubResource("TileSetAtlasSource_qc6wb")
+
+[node name="Yellow_buildings" type="TileMapLayer" unique_id=304116526]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_veaqi")

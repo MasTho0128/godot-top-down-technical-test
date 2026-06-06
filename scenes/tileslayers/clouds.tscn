@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://54x0x8kgcmhu"]
+
+[ext_resource type="Texture2D" uid="uid://cusr6t67aitjo" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_01.png" id="1_n5su1"]
+[ext_resource type="Texture2D" uid="uid://dlgm6c0l1etdp" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_02.png" id="2_mdcwg"]
+[ext_resource type="Texture2D" uid="uid://bkvng8dcrgkj2" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_03.png" id="3_0tdry"]
+[ext_resource type="Texture2D" uid="uid://bra6if6c5pp0d" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_04.png" id="4_7x60x"]
+[ext_resource type="Texture2D" uid="uid://cp858kkkupn6l" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_05.png" id="5_8ji05"]
+[ext_resource type="Texture2D" uid="uid://bx58t1eoot02t" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_06.png" id="6_ie2bd"]
+[ext_resource type="Texture2D" uid="uid://bv6dgqb3bxh8i" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_07.png" id="7_lkoig"]
+[ext_resource type="Texture2D" uid="uid://dhtj8fd0c8j3h" path="res://assets/Tiny Swords (Free Pack)/Terrain/Decorations/Clouds/Clouds_08.png" id="8_axswp"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22bx6"]
+texture = ExtResource("1_n5su1")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ceorq"]
+texture = ExtResource("2_mdcwg")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vbwpk"]
+texture = ExtResource("3_0tdry")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sr2gs"]
+texture = ExtResource("4_7x60x")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_of038"]
+texture = ExtResource("5_8ji05")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i2lgl"]
+texture = ExtResource("6_ie2bd")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ebsc5"]
+texture = ExtResource("7_lkoig")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n7jje"]
+texture = ExtResource("8_axswp")
+texture_region_size = Vector2i(576, 256)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_71gbx"]
+tile_size = Vector2i(64, 64)
+sources/0 = SubResource("TileSetAtlasSource_22bx6")
+sources/1 = SubResource("TileSetAtlasSource_ceorq")
+sources/2 = SubResource("TileSetAtlasSource_vbwpk")
+sources/3 = SubResource("TileSetAtlasSource_sr2gs")
+sources/4 = SubResource("TileSetAtlasSource_of038")
+sources/5 = SubResource("TileSetAtlasSource_i2lgl")
+sources/6 = SubResource("TileSetAtlasSource_ebsc5")
+sources/7 = SubResource("TileSetAtlasSource_n7jje")
+
+[node name="Clouds" type="TileMapLayer" unique_id=186961719]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_71gbx")

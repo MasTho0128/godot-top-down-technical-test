@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://dx1y177ikrwcy"]
+
+[ext_resource type="Script" uid="uid://b5evaw573yksy" path="res://scripts/FMS/control_estados.gd" id="1_ixs0e"]
+
+[node name="Actor" type="CharacterBody2D" unique_id=205665258]
+
+[node name="Colision" type="CollisionShape2D" parent="." unique_id=937472355]
+
+[node name="FMS" type="Node" parent="." unique_id=123186989]
+script = ExtResource("1_ixs0e")
+
+[node name="Audio" type="Node2D" parent="." unique_id=1374664011]
+
+[node name="Visual" type="Node2D" parent="." unique_id=312369873]
+
+[node name="AnimsP" type="Node" parent="." unique_id=1469657389]
+
+[node name="Timers" type="Node" parent="." unique_id=994448577]

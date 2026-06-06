@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://cvdhlp33v8my8"]
+
+[ext_resource type="Texture2D" uid="uid://cthxkanailrpp" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Archery.png" id="1_0b54f"]
+[ext_resource type="Texture2D" uid="uid://bx21cf7lgb0hc" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Castle.png" id="2_soo02"]
+[ext_resource type="Texture2D" uid="uid://8sogiauiyubb" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House1.png" id="3_21p2y"]
+[ext_resource type="Texture2D" uid="uid://boamthf77ced3" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/House3.png" id="4_xdlg3"]
+[ext_resource type="Texture2D" uid="uid://c2h01h1u5u01x" path="res://assets/Tiny Swords (Free Pack)/Buildings/Red Buildings/Tower.png" id="5_6ly65"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_incsx"]
+texture = ExtResource("1_0b54f")
+texture_region_size = Vector2i(192, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, 32, -64, 32, -64, -32, 64, -32, 64, 80, 16, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oqkao"]
+texture = ExtResource("2_soo02")
+texture_region_size = Vector2i(320, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-128, 16, 128, 16, 112, 80, -112, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ah8l8"]
+texture = ExtResource("3_21p2y")
+texture_region_size = Vector2i(128, 192)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16, 32, -16, 32, 48, -32, 48)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gi0i1"]
+texture = ExtResource("4_xdlg3")
+texture_region_size = Vector2i(128, 192)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -16, 32, -16, 32, 80, -32, 80)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hgx07"]
+texture = ExtResource("5_6ly65")
+texture_region_size = Vector2i(128, 256)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_633dn"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_incsx")
+sources/1 = SubResource("TileSetAtlasSource_oqkao")
+sources/2 = SubResource("TileSetAtlasSource_ah8l8")
+sources/3 = SubResource("TileSetAtlasSource_gi0i1")
+sources/4 = SubResource("TileSetAtlasSource_hgx07")
+
+[node name="Red_buildings" type="TileMapLayer" unique_id=1562085525]
+y_sort_enabled = true
+tile_set = SubResource("TileSet_633dn")

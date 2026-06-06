@@ -1,0 +1,675 @@
+[gd_scene format=3 uid="uid://dek1kc5vclv38"]
+
+[ext_resource type="PackedScene" uid="uid://dx1y177ikrwcy" path="res://scenes/actors/actor.tscn" id="1_rpkul"]
+[ext_resource type="Script" uid="uid://c82cfk6h27cxj" path="res://scripts/actors/warrior/warrior.gd" id="2_35nv6"]
+[ext_resource type="Script" uid="uid://vncyo20evvcu" path="res://scripts/components/hurtbox.gd" id="3_0v2s2"]
+[ext_resource type="Script" uid="uid://bw5qyduavm84n" path="res://scripts/components/hitbox.gd" id="3_od8dr"]
+[ext_resource type="AudioStream" uid="uid://dikjv62e8o2n8" path="res://Audio/sfx/attack.wav" id="4_hp00p"]
+[ext_resource type="AudioStream" uid="uid://bf12hppu0mwb6" path="res://Audio/sfx/hurt.wav" id="5_cl7gr"]
+[ext_resource type="Texture2D" uid="uid://6b6878c3xie7" path="res://assets/vfx/Base_Expanding_Fireball.png" id="8_a24je"]
+[ext_resource type="Script" uid="uid://ci11yh1xfg3gp" path="res://scripts/components/health.gd" id="9_35nv6"]
+[ext_resource type="Script" uid="uid://dy23yn5ain172" path="res://scripts/components/patrol.gd" id="10_35nv6"]
+[ext_resource type="PackedScene" uid="uid://cfprktawsrjbs" path="res://scenes/ui/lifebar.tscn" id="10_a24je"]
+[ext_resource type="Script" uid="uid://bob1ifk7i0te0" path="res://scripts/components/combat_component.gd" id="11_a24je"]
+[ext_resource type="Texture2D" uid="uid://cwfqy01k6ebtk" path="res://assets/Tiny Swords (Free Pack)/Units/Yellow Units/Warrior/WarriorAtlas.png" id="15_j1p84"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0nhyu"]
+size = Vector2(23, 42)
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_j1p84"]
+var/dead/name = &"dead"
+var/dead/type = 4
+var/dead/value = ""
+var/dead/hint = 0
+var/dead/hint_string = "dead"
+var/attack/name = &"attack"
+var/attack/type = 4
+var/attack/value = ""
+var/attack/hint = 0
+var/attack/hint_string = "attack"
+var/walk/name = &"walk"
+var/walk/type = 4
+var/walk/value = ""
+var/walk/hint = 0
+var/walk/hint_string = "walk"
+var/idle/name = &"idle"
+var/idle/type = 3
+var/idle/value = 0.0
+var/idle/hint = 0
+var/idle/hint_string = "idle"
+
+[sub_resource type="BBVariant" id="BBVariant_j1p84"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_xoxuw"]
+property = &"is_dead"
+value = SubResource("BBVariant_j1p84")
+
+[sub_resource type="BBNode" id="BBNode_uqgqb"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_wshhh"]
+node = SubResource("BBNode_uqgqb")
+method = &"Die"
+
+[sub_resource type="BBNode" id="BBNode_xoxuw"]
+saved_value = NodePath("AnimsP/AnimationPlayer")
+resource_name = "AnimsP/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_l3h00"]
+animation_player = SubResource("BBNode_xoxuw")
+animation_name = &"dead"
+
+[sub_resource type="BTSequence" id="BTSequence_l3h00"]
+custom_name = "Dead"
+children = [SubResource("BTCheckAgentProperty_xoxuw"), SubResource("BTCallMethod_wshhh"), SubResource("BTPlayAnimation_l3h00")]
+
+[sub_resource type="BBVariant" id="BBVariant_trgsc"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_l3h00"]
+property = &"is_target_in_attack_range"
+value = SubResource("BBVariant_trgsc")
+
+[sub_resource type="BBNode" id="BBNode_trgsc"]
+saved_value = NodePath("AnimsP/AnimationPlayer")
+resource_name = "AnimsP/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_u6sv1"]
+animation_player = SubResource("BBNode_trgsc")
+animation_name = &"attack"
+
+[sub_resource type="BBNode" id="BBNode_hp00p"]
+saved_value = NodePath("Audio/AudioAttack")
+resource_name = "Audio/AudioAttack"
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_cl7gr"]
+node = SubResource("BBNode_hp00p")
+method = &"play"
+
+[sub_resource type="BBVariant" id="BBVariant_l3h00"]
+type = 4
+saved_value = "attack"
+resource_name = "attack"
+
+[sub_resource type="BBNode" id="BBNode_4ryrp"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_sfk1p"]
+node = SubResource("BBNode_4ryrp")
+method = &"SetState"
+args = Array[BBVariant]([SubResource("BBVariant_l3h00")])
+
+[sub_resource type="BBNode" id="BBNode_l3h00"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_4ryrp"]
+node = SubResource("BBNode_l3h00")
+method = &"AttackTarget"
+
+[sub_resource type="BTWait" id="BTWait_j1p84"]
+
+[sub_resource type="BBVariant" id="BBVariant_xoxuw"]
+type = 4
+saved_value = "idle"
+resource_name = "idle"
+
+[sub_resource type="BBNode" id="BBNode_embmg"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_nvr5e"]
+node = SubResource("BBNode_embmg")
+method = &"SetState"
+args = Array[BBVariant]([SubResource("BBVariant_xoxuw")])
+
+[sub_resource type="BTSequence" id="BTSequence_trgsc"]
+custom_name = "Attack"
+children = [SubResource("BTCheckAgentProperty_l3h00"), SubResource("BTPlayAnimation_u6sv1"), SubResource("BTCallMethod_cl7gr"), SubResource("BTCallMethod_sfk1p"), SubResource("BTCallMethod_4ryrp"), SubResource("BTWait_j1p84"), SubResource("BTCallMethod_nvr5e")]
+
+[sub_resource type="BBVariant" id="BBVariant_sfk1p"]
+type = 1
+saved_value = true
+resource_name = "true"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_u6sv1"]
+property = &"is_target_detected"
+value = SubResource("BBVariant_sfk1p")
+
+[sub_resource type="BBVariant" id="BBVariant_jvqgc"]
+type = 1
+saved_value = false
+resource_name = "false"
+
+[sub_resource type="BTCheckAgentProperty" id="BTCheckAgentProperty_uqgqb"]
+property = &"is_target_in_attack_range"
+value = SubResource("BBVariant_jvqgc")
+
+[sub_resource type="BBNode" id="BBNode_sfk1p"]
+saved_value = NodePath("AnimsP/AnimationPlayer")
+resource_name = "AnimsP/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_uqgqb"]
+animation_player = SubResource("BBNode_sfk1p")
+animation_name = &"run"
+
+[sub_resource type="BBVariant" id="BBVariant_4ryrp"]
+type = 4
+saved_value = "run"
+resource_name = "run"
+
+[sub_resource type="BBNode" id="BBNode_wshhh"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_embmg"]
+node = SubResource("BBNode_wshhh")
+method = &"SetState"
+args = Array[BBVariant]([SubResource("BBVariant_4ryrp")])
+
+[sub_resource type="BBNode" id="BBNode_nvr5e"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_pklx1"]
+node = SubResource("BBNode_nvr5e")
+method = &"ChaseTarget"
+args_include_delta = true
+
+[sub_resource type="BTSequence" id="BTSequence_4ryrp"]
+custom_name = "Chase"
+children = [SubResource("BTCheckAgentProperty_u6sv1"), SubResource("BTCheckAgentProperty_uqgqb"), SubResource("BTPlayAnimation_uqgqb"), SubResource("BTCallMethod_embmg"), SubResource("BTCallMethod_pklx1")]
+
+[sub_resource type="BBVariant" id="BBVariant_u6sv1"]
+type = 4
+saved_value = "walk"
+resource_name = "walk"
+
+[sub_resource type="BBNode" id="BBNode_11kem"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_2a17d"]
+node = SubResource("BBNode_11kem")
+method = &"SetState"
+args = Array[BBVariant]([SubResource("BBVariant_u6sv1")])
+
+[sub_resource type="BBNode" id="BBNode_u6sv1"]
+saved_value = NodePath("AnimsP/AnimationPlayer")
+resource_name = "AnimsP/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_nvr5e"]
+animation_player = SubResource("BBNode_u6sv1")
+animation_name = &"walk"
+
+[sub_resource type="BBNode" id="BBNode_r1wlt"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_xf5ci"]
+node = SubResource("BBNode_r1wlt")
+method = &"Patrol"
+args_include_delta = true
+
+[sub_resource type="BTWait" id="BTWait_xoxuw"]
+duration = 3.0
+
+[sub_resource type="BTSequence" id="BTSequence_sfk1p"]
+custom_name = "Patrol"
+children = [SubResource("BTCallMethod_2a17d"), SubResource("BTPlayAnimation_nvr5e"), SubResource("BTCallMethod_xf5ci"), SubResource("BTWait_xoxuw")]
+
+[sub_resource type="BBVariant" id="BBVariant_uqgqb"]
+type = 4
+saved_value = "idle"
+resource_name = "idle"
+
+[sub_resource type="BBNode" id="BBNode_ekvoq"]
+saved_value = NodePath(".")
+resource_name = "."
+
+[sub_resource type="BTCallMethod" id="BTCallMethod_gahfa"]
+node = SubResource("BBNode_ekvoq")
+method = &"set_state"
+args = Array[BBVariant]([SubResource("BBVariant_uqgqb")])
+
+[sub_resource type="BBNode" id="BBNode_jvqgc"]
+saved_value = NodePath("AnimsP/AnimationPlayer")
+resource_name = "AnimsP/AnimationPlayer"
+
+[sub_resource type="BTPlayAnimation" id="BTPlayAnimation_trgsc"]
+animation_player = SubResource("BBNode_jvqgc")
+animation_name = &"idle"
+
+[sub_resource type="BTSequence" id="BTSequence_u6sv1"]
+custom_name = "Idle"
+children = [SubResource("BTCallMethod_gahfa"), SubResource("BTPlayAnimation_trgsc")]
+
+[sub_resource type="BTDynamicSelector" id="BTDynamicSelector_j1p84"]
+custom_name = "Root"
+children = [SubResource("BTSequence_l3h00"), SubResource("BTSequence_trgsc"), SubResource("BTSequence_4ryrp"), SubResource("BTSequence_sfk1p"), SubResource("BTSequence_u6sv1")]
+
+[sub_resource type="BehaviorTree" id="BehaviorTree_4ryrp"]
+blackboard_plan = SubResource("BlackboardPlan_j1p84")
+root_task = SubResource("BTDynamicSelector_j1p84")
+
+[sub_resource type="BlackboardPlan" id="BlackboardPlan_b5ewl"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xoxuw"]
+radius = 65.12296
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j1p84"]
+radius = 150.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q65i5"]
+radius = 48.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_od8dr"]
+radius = 68.0294
+
+[sub_resource type="Animation" id="Animation_b5ewl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Actor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visual/dead:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/Actor:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Colision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xoxuw"]
+resource_name = "attack"
+length = 0.1333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Actor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [16, 17, 18, 19]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_trgsc"]
+resource_name = "dead"
+length = 1.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/dead:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335, 0.26666668, 0.3, 0.33333334, 0.36666667, 0.40000004, 0.43333337, 0.4666667, 0.5, 0.53333336, 0.5666667, 0.6, 0.6333334, 0.6666667, 0.70000005, 0.73333335, 0.7666667, 0.8000001, 0.8333334, 0.86666673, 0.90000004, 0.9333334, 0.9666667, 1, 1.0333334, 1.0666667, 1.1, 1.1333334, 1.1666667, 1.2, 1.2333333, 1.2666668, 1.3000001, 1.3333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/Actor:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Colision:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HurtboxComponent/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visual/dead:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.3666667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_j1p84"]
+resource_name = "idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Actor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667, 0.20000002, 0.23333335),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_l3h00"]
+resource_name = "run"
+length = 0.18
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Actor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.06666667, 0.10000001, 0.13333334, 0.16666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4ryrp"]
+resource_name = "walk"
+length = 0.3571
+loop_mode = 1
+step = 0.07
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/Actor:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.071428575, 0.14285715, 0.21428572, 0.2857143, 0.3571),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/HitboxComponent/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xoxuw"]
+_data = {
+&"RESET": SubResource("Animation_b5ewl"),
+&"attack": SubResource("Animation_xoxuw"),
+&"dead": SubResource("Animation_trgsc"),
+&"idle": SubResource("Animation_j1p84"),
+&"run": SubResource("Animation_l3h00"),
+&"walk": SubResource("Animation_4ryrp")
+}
+
+[node name="Warrior" unique_id=205665258 instance=ExtResource("1_rpkul")]
+y_sort_enabled = true
+script = ExtResource("2_35nv6")
+
+[node name="Colision" parent="." index="0" unique_id=937472355]
+position = Vector2(-1.5, 8)
+shape = SubResource("RectangleShape2D_0nhyu")
+
+[node name="FMS" parent="." index="1" unique_id=123186989]
+script = null
+
+[node name="BTPlayer" type="BTPlayer" parent="." index="2" unique_id=2113689385]
+behavior_tree = SubResource("BehaviorTree_4ryrp")
+blackboard_plan = SubResource("BlackboardPlan_b5ewl")
+
+[node name="AudioAttack" type="AudioStreamPlayer2D" parent="Audio" parent_id_path=PackedInt32Array(1374664011) index="0" unique_id=934743587]
+stream = ExtResource("4_hp00p")
+pitch_scale = 1.5
+
+[node name="AudioHurt" type="AudioStreamPlayer2D" parent="Audio" parent_id_path=PackedInt32Array(1374664011) index="1" unique_id=1393843471]
+stream = ExtResource("5_cl7gr")
+pitch_scale = 2.0
+
+[node name="AudioDead" type="AudioStreamPlayer2D" parent="Audio" parent_id_path=PackedInt32Array(1374664011) index="2" unique_id=1646077784]
+stream = ExtResource("4_hp00p")
+pitch_scale = 0.5
+
+[node name="AttackArea" type="Area2D" parent="." index="4" unique_id=1839929011]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" index="0" unique_id=200913991]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_xoxuw")
+
+[node name="DetectionArea" type="Area2D" parent="." index="5" unique_id=1454288223]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" index="0" unique_id=374686929]
+shape = SubResource("CircleShape2D_j1p84")
+
+[node name="HurtboxComponent" type="Area2D" parent="." index="6" unique_id=1732367699 node_paths=PackedStringArray("health_component") groups=["ignore"]]
+script = ExtResource("3_0v2s2")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://vncyo20evvcu"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0" unique_id=1381932990]
+shape = SubResource("CircleShape2D_q65i5")
+
+[node name="HitboxComponent" type="Area2D" parent="Visual" parent_id_path=PackedInt32Array(312369873) index="0" unique_id=282436859 groups=["ignore"]]
+script = ExtResource("3_od8dr")
+metadata/_custom_type_script = "uid://bw5qyduavm84n"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/HitboxComponent" index="0" unique_id=1666203190]
+shape = SubResource("CircleShape2D_od8dr")
+disabled = true
+debug_color = Color(0.9492838, 6.3532593e-06, 0.57661045, 0.41960785)
+
+[node name="Actor" type="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(312369873) index="1" unique_id=101093957]
+texture = ExtResource("15_j1p84")
+hframes = 8
+vframes = 3
+
+[node name="dead" type="Sprite2D" parent="Visual" parent_id_path=PackedInt32Array(312369873) index="2" unique_id=1889404312]
+texture = ExtResource("8_a24je")
+hframes = 6
+vframes = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimsP" parent_id_path=PackedInt32Array(1469657389) index="0" unique_id=188788847]
+root_node = NodePath("../..")
+libraries/ = SubResource("AnimationLibrary_xoxuw")
+autoplay = &"idle"
+
+[node name="PatrolTimer" type="Timer" parent="Timers" parent_id_path=PackedInt32Array(994448577) index="0" unique_id=753763857]
+one_shot = true
+
+[node name="AttackTimer" type="Timer" parent="Timers" parent_id_path=PackedInt32Array(994448577) index="1" unique_id=1958643655]
+one_shot = true
+
+[node name="DetecTimer" type="Timer" parent="Timers" parent_id_path=PackedInt32Array(994448577) index="2" unique_id=2141501304]
+wait_time = 0.5
+one_shot = true
+
+[node name="HealthComponent" type="Node" parent="." index="10" unique_id=1655665800]
+script = ExtResource("9_35nv6")
+max_health = 2
+metadata/_custom_type_script = "uid://ci11yh1xfg3gp"
+
+[node name="PatrolComponent" type="Node2D" parent="." index="11" unique_id=2130228401]
+script = ExtResource("10_35nv6")
+
+[node name="CombatComponent" type="Node2D" parent="." index="12" unique_id=902718868]
+script = ExtResource("11_a24je")
+
+[node name="lifebar" parent="." index="13" unique_id=371890117 instance=ExtResource("10_a24je")]
+offset_left = -67.0
+offset_top = -94.0
+offset_right = 61.0
+offset_bottom = -30.0
+actor = NodePath("..")
+
+[node name="BigBarBase" parent="lifebar" index="0" unique_id=183378361]
+self_modulate = Color(1, 1, 1, 0)
+
+[node name="TextureProgressBar" parent="lifebar/BigBarBase" index="0" unique_id=1809323206]
+self_modulate = Color(1, 1, 1, 0.49803922)
+offset_top = 34.0
+offset_bottom = -18.0
+
+[connection signal="timeout" from="Timers/DetecTimer" to="." method="_on_detection_reset_timer_timeout"]
+
+[editable path="lifebar"]

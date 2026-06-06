@@ -1,0 +1,145 @@
+[gd_scene format=3 uid="uid://c0c1wemhcykhy"]
+
+[ext_resource type="Script" uid="uid://cffklm03ks72v" path="res://scripts/Ui/ui_game_over.gd" id="1_js0u5"]
+[ext_resource type="Texture2D" uid="uid://b7mxgpvbud3ju" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Wood Table/WoodTable2.png" id="1_w2j08"]
+[ext_resource type="Texture2D" uid="uid://duhhpq4iyqfa2" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Ribbons/BigRibbons.png" id="2_js0u5"]
+[ext_resource type="FontFile" uid="uid://d25vkmce7mhlt" path="res://demo/assets/fonts/knewave_regular.ttf" id="3_h0wur"]
+[ext_resource type="Texture2D" uid="uid://cfhn0cg8h6dn0" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Regular.png" id="4_iayyk"]
+[ext_resource type="Texture2D" uid="uid://1ex138mkh0j3" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Buttons/SmallBlueRoundButton_Pressed.png" id="5_j6ahk"]
+[ext_resource type="Texture2D" uid="uid://dl1380v0efscq" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Buttons/SmallRedRoundButton_Regular.png" id="6_o0sa6"]
+[ext_resource type="Texture2D" uid="uid://bibk87udfwtl1" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Buttons/SmallRedRoundButton_Pressed.png" id="7_6k0n8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xscp2"]
+atlas = ExtResource("2_js0u5")
+region = Rect2(30, 276, 259, 103)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydttg"]
+font = ExtResource("3_h0wur")
+font_size = 64
+
+[sub_resource type="LabelSettings" id="LabelSettings_n63od"]
+font = ExtResource("3_h0wur")
+font_size = 40
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wb0fo"]
+font = ExtResource("3_h0wur")
+font_size = 64
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Ui_Game_Over" type="Control" unique_id=1987292219]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_js0u5")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=112412263]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -223.0
+offset_top = -241.26294
+offset_right = 223.0
+offset_bottom = 241.26294
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_w2j08")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="NinePatchRect" type="NinePatchRect" parent="TextureRect" unique_id=1757682474]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -85.0
+offset_top = -28.73706
+offset_right = 85.0
+offset_bottom = 91.26294
+grow_horizontal = 2
+texture = SubResource("AtlasTexture_xscp2")
+region_rect = Rect2(0, 0, 259, 103)
+patch_margin_left = 95
+patch_margin_top = 13
+patch_margin_right = 93
+patch_margin_bottom = 31
+axis_stretch_horizontal = 2
+
+[node name="Label" type="Label" parent="TextureRect/NinePatchRect" unique_id=1967873990]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -15.474121
+offset_bottom = -15.474121
+grow_horizontal = 2
+grow_vertical = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_ydttg")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect" unique_id=1148324173]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/VBoxContainer" unique_id=1892038738]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="TextureRect/VBoxContainer/HBoxContainer" unique_id=1148867860]
+layout_mode = 2
+texture_normal = ExtResource("6_o0sa6")
+texture_pressed = ExtResource("7_6k0n8")
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/HBoxContainer/TextureButton2" unique_id=1035981984]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 32.26294
+offset_bottom = 32.26294
+grow_horizontal = 2
+grow_vertical = 2
+text = "🚪"
+label_settings = SubResource("LabelSettings_n63od")
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect/VBoxContainer/HBoxContainer" unique_id=701467762]
+layout_mode = 2
+texture_normal = ExtResource("4_iayyk")
+texture_pressed = ExtResource("5_j6ahk")
+
+[node name="Label" type="Label" parent="TextureRect/VBoxContainer/HBoxContainer/TextureButton" unique_id=395142650]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 10.262939
+offset_bottom = 10.262939
+grow_horizontal = 2
+grow_vertical = 2
+text = "⟳"
+label_settings = SubResource("LabelSettings_wb0fo")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1034333781]
+one_shot = true
+
+[connection signal="pressed" from="TextureRect/VBoxContainer/HBoxContainer/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/HBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

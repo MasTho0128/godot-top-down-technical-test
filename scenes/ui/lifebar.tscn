@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cfprktawsrjbs"]
+
+[ext_resource type="Texture2D" uid="uid://cece7axpftrde" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Bars/BigBar_2.png" id="1_agjdh"]
+[ext_resource type="Script" uid="uid://83g5nwu0awg4" path="res://scripts/Ui/lifebar.gd" id="1_m7lgm"]
+[ext_resource type="Texture2D" uid="uid://b2su7xi48qax5" path="res://assets/Tiny Swords (Free Pack)/UI Elements/UI Elements/Bars/BigBar_Fill.png" id="2_m7lgm"]
+
+[node name="lifebar" type="Control" unique_id=371890117]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_m7lgm")
+
+[node name="BigBarBase" type="TextureRect" parent="." unique_id=183378361]
+texture_filter = 1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 64.0
+texture = ExtResource("1_agjdh")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="BigBarBase" unique_id=1809323206]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_right = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+nine_patch_stretch = true
+texture_progress = ExtResource("2_m7lgm")

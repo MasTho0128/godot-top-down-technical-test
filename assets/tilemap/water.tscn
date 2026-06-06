@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dfkbf2qh2hdlp"]
+
+[ext_resource type="Texture2D" uid="uid://g7xea5ic06sr" path="res://assets/tilemap/Water Background color.png" id="1_hsamw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c76et"]
+texture = ExtResource("1_hsamw")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -32, 32, -32, 32, 32, -32, 32)
+
+[sub_resource type="TileSet" id="TileSet_0ypw0"]
+tile_size = Vector2i(64, 64)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_c76et")
+
+[node name="Water" type="TileMapLayer" unique_id=7180141]
+tile_set = SubResource("TileSet_0ypw0")
